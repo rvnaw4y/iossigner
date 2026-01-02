@@ -3,6 +3,7 @@ name: Build iOS IPA
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,7 +17,12 @@ jobs:
       with:
         xcode-version: "15.3"
 
-    - name: Build IPA
+    - name: Decode certificates
+      run: |
+        echo $IOS_CERTIFICATE | base64 --decode > cert.p12
+        echo $IOS_PROFILE | base64 --decode > profile.mobileprovision
+
+    - name: Build Archive
       run: |
         xcodebuild -scheme MySignerApp \
                    -configuration Release \
