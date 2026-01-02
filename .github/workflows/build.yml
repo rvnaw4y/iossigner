@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Set up Xcode
-      uses: maxim-lobanov/setup-xcode@v2
+      uses: maxim-lobanov/setup-xcode@v3
       with:
         xcode-version: "15.3"
 
@@ -37,7 +37,7 @@ jobs:
                    -exportPath $PWD/build/IPA
 
     - name: Upload IPA artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: MySignerApp.ipa
         path: build/IPA/MySignerApp.ipa
