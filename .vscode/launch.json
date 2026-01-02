@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:iossigner}",
+            "name": "Debug iossigner",
+            "target": "iossigner",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug iossigner"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:iossigner}",
+            "name": "Release iossigner",
+            "target": "iossigner",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release iossigner"
+        }
+    ]
+}

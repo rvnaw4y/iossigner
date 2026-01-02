@@ -1,0 +1,37 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v2
+      with:
+        xcode-version: "15.3"
+
+    - name: Build IPA
+      run: |
+        xcodebuild -scheme MySignerApp \
+                   -configuration Release \
+                   -sdk iphoneos \
+                   -archivePath $PWD/build/MySignerApp.xcarchive archive
+
+    - name: Export IPA
+      run: |
+        xcodebuild -exportArchive \
+                   -archivePath $PWD/build/MySignerApp.xcarchive \
+                   -exportOptionsPlist exportOptions.plist \
+                   -exportPath $PWD/build/IPA
+
+    - name: Upload IPA artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: MySignerApp.ipa
+        path: build/IPA/MySignerApp.ipa
